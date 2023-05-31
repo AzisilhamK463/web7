@@ -7,7 +7,7 @@ use App\Models\kelas;
 use Illuminate\Foundation\Mix;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\pdf;
 
 class MahasiswaController extends Controller
 {
@@ -133,4 +133,32 @@ class MahasiswaController extends Controller
         return redirect()->route('mahasiswas.index')
             ->with('success', 'Mahasiswa Berhasil Dihapus');
     }
+
+    public function khs(Mahasiswa $mahasiswa)
+    {
+        $matkul = $mahasiswa->matakuliah;
+
+        return view('mahasiswas.khs', [
+            'matkul' => $matkul,
+            'mahasiswa' => $mahasiswa
+        ]);
+        // dd($matkul);
+
+        // $role = Mahasiswa::where('Nim', '2141720039')->first();
+
+        // dd($role->matakuliahs);
+
+
+        // dd($data);
+    }
+
+    // public function cetak_khs(Mahasiswa $mahasiswa)
+    // {
+    //     $matkul = $mahasiswa->matakuliah;
+    //     $pdf = pdf::loadview('mahasiswas.cetak_khs', [
+    //         'matkul' => $matkul,
+    //         'mahasiswa' => $mahasiswa,
+    //     ]);
+    //     return $pdf->stream();
+    // }
 }

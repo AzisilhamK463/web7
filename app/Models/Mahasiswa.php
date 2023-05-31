@@ -25,4 +25,14 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(Kelas::class);
     }
+
+    public function matakuliah(): BelongsToMany
+    {
+        return $this->belongsToMany(Matakuliah::class, 'mahasiswa_matakuliah', 'mahasiswas_nim', 'matakuliah_id')->withPivot('nilai');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'Nim';
+    }
 }
